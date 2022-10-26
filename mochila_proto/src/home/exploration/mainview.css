@@ -1,0 +1,8 @@
+.mainview{
+    height: 55%;
+    border: 4px dotted blue;
+    display: flex;
+    justify-content: center;
+    color: tan;
+    align-items: center;
+}

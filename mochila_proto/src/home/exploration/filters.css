@@ -1,0 +1,8 @@
+.filters{
+    width: 50%;
+    border: 4px dotted red;
+    display: flex;
+    justify-content: center;
+    color: tan;
+    align-items: center;
+}

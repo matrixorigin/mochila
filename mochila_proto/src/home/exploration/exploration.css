@@ -1,0 +1,17 @@
+.exploration{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.views{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1
+}
+
+.bottom_row{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}

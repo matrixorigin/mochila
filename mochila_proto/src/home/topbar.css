@@ -1,0 +1,33 @@
+.topbar {
+    width: 100%; 
+    background-color: rgb(0, 61, 51);
+    display: flex;
+    min-height: 50px;
+    flex-direction: row;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    font-size:2em;
+    font-weight: bold;
+    padding: 0.5em;
+    border: 4px dotted red;
+    color: rgb(204, 204, 204);
+}
+
+.tab {
+    color: rgb(204, 204, 204);
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    background: none;
+    font-weight: bolder;
+    padding: 0.5em;
+    border: 4px dotted green;
+    
+}
+
+.tab:hover {
+    color: grey
+}

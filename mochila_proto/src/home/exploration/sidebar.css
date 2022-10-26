@@ -1,0 +1,7 @@
+.sidebar{
+    width: 15%;
+    min-width: 12em;
+    display: flex;
+    flex-direction: column;
+    background-color: grey;
+}

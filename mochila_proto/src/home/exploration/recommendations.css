@@ -1,0 +1,8 @@
+.recommendations{
+    width: 50%;
+    border: 4px dotted orange;
+    display: flex;
+    justify-content: center;
+    color: tan;
+    align-items: center;
+}
