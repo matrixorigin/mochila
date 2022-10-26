@@ -61,6 +61,17 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
+# React stuff:
+/build
+/node_modules
+/.pnp
+/coverage
+.pnp.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.db
+
 # Flask stuff:
 instance/
 .webassets-cache
