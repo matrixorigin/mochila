@@ -31,13 +31,13 @@ $ npm install
 - To start the server, navigate into the localserver directory and type 'flask run'
 cd your/path/mochila_proto/localserver
 ```console
-flask run
+$ flask run
 ```
 - Make sure not to close this terminal, as the server will terminate if it is closed.
 - To start the web page, navigate to mochila_proto in a separate terminal and type 'npm start'
 cd your/path/mochila_proto
 ```console
-npm start
+$ npm start
 ```
 - Again, make sure to not close this terminal
 - If the webpage does not open automatically, navigate to 'http://localhost:3000' on your preferred web browser

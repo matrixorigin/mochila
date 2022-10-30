@@ -11,7 +11,7 @@ function tab_render(val) {
     }
 }
 
-function Homepage({setIsloggedin}) {
+function Homepage({fetch_login_status, isloggedin}) {
     //top bar
     //side bar
     //focus graph
@@ -20,7 +20,7 @@ function Homepage({setIsloggedin}) {
     const [page, setPage] = React.useState(0)
     return(
         <div className="homepage">
-            <Topbar callback={setPage}></Topbar>
+            <Topbar callback={setPage} fetch_login_status={fetch_login_status}></Topbar>
             <div className="page">
                 {tab_render(page)}
             </div>

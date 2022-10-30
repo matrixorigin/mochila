@@ -53,7 +53,13 @@
   padding: 0.7em;
   background-color: rgb(209, 84, 84);
   top: 1em;
-
   border-radius: 1em;
-  
+}
+
+button:hover, input[type="submit"].hover {
+  filter: brightness(80%);
+}
+
+button:active, input[type="submit"].active {
+  filter: brightness(60%);
 }
