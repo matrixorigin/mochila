@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import { send_credentials } from '../utils';
-import './topbar.css'
+import './topbar.css';
 
-function Topbar({callback, fetch_login_status}) {
+function Topbar({callback, setIsloggedin}) {
     return(
         <div className='topbar'>
             <div className="title">Here Title</div>
@@ -14,12 +14,11 @@ function Topbar({callback, fetch_login_status}) {
             onClick={() => callback(1)}>SQL Terminal</button>
             <button className="tab" id="logout"
             onClick={(e) => {
-                send_credentials(e, null, null, null, null);
-                fetch_login_status()
+                send_credentials(e, null, null, null, null).then(setIsloggedin(false));
             }}>Log Out</button>
 
         </div>
     );
 }
 
-export default Topbar
+export default Topbar;

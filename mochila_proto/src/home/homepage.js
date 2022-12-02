@@ -3,24 +3,18 @@ import Topbar from './topbar';
 import Exploration from './exploration/exploration'
 import './homepage.css'
 
-function tab_render(val) {
-    if(val === 0) {
-        return <Exploration></Exploration>
-    } else {
-        return NaN
-    }
-}
 
-function Homepage({fetch_login_status, isloggedin}) {
-    //top bar
-    //side bar
-    //focus graph
-    //recommendations
-    //filters
+function Homepage({setIsloggedin}) {
     const [page, setPage] = React.useState(0)
-    return(
+
+    function tab_render(val) {
+        if(val === 0) {
+            return(<Exploration></Exploration>)
+        } else {return NaN;}}
+
+    return (
         <div className="homepage">
-            <Topbar callback={setPage} fetch_login_status={fetch_login_status}></Topbar>
+            <Topbar callback={setPage} setIsloggedin={setIsloggedin}/>
             <div className="page">
                 {tab_render(page)}
             </div>

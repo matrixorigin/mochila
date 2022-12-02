@@ -2,6 +2,8 @@
     width: 15%;
     min-width: 12em;
     display: flex;
+    overflow: scroll;
+    max-height: 100vh;
     flex-direction: column;
     background-color: grey;
 }

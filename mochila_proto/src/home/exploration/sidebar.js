@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import "./sidebar.css";
 
-function Sidebar() {
-    const [dbstructure, Setdbstructure] = useState({"hello": ["a", "b", "c"], "world": ["d", "e", "f"]})
+function Sidebar({dbschema}) {
     return(
         <div className="sidebar">
-            {Object.entries(dbstructure).map((key) => {
+            {dbschema && dbschema.map(key => {
                 return(
                     <div>
                     <h3>{key[0]}</h3>

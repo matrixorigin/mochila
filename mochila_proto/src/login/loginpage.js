@@ -3,33 +3,32 @@ import { Navigate } from "react-router-dom";
 import { send_credentials } from "../utils";
 import './loginpage.css'
 
-function LoginPage({ fetch_login_status, isloggedin}) {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [host, setHost] = useState('');
-    const [port, setPort] = useState('');
-    const [wrongconn, setWrongconn] = useState(false);
+function LoginPage({isloggedin, setIsLoggedin}) {
+    const [username, setUsername] = useState('dump');
+    const [password, setPassword] = useState('111');
+    const [host, setHost] = useState('127.0.0.1');
+    const [port, setPort] = useState('6001');
+    const [wrongconn, setWrongconn] = useState("");
     const [dblist, setDblist] = useState();
 
-    function select_db(e) {
-        var data = {"dbname ": e.target.id};
-        fetch('http://127.0.0.1:5000/databases', {
+    async function select_db(e) {
+        var data = {"dbname": e.target.id};
+        fetch('http://127.0.0.1:5000/auth/db', {
             method: "POST",
             body: JSON.stringify(data)
-        }).then((response) => {
-            if(response['status'] === 200) {
-                console.log("select_db selected valid db");
-                fetch_login_status();
-            } else {
-                console.log("select_db status != 200")
-            }
+        }).then(response => response.json())
+        .then((responsedata) => {
+            if(responsedata["valid"]) {
+                setIsLoggedin(true); //transition trigger to main
+                setWrongconn("");
+            } else {setWrongconn("Unable to establish connection to specified database");}
         }).catch((err) => {console.log(err)})
     }
 
     function get_dblist() {
-        fetch('http://127.0.0.1:5000/databases', {method: "GET"})
+        fetch('http://127.0.0.1:5000/auth/db', {method: "GET"})
         .then((response) => response.json())
-        .then((responsedata) => {setDblist(responsedata["results"])})
+        .then((responsedata) => {setDblist(responsedata["data"])})
         .catch((err) => {console.log(err)})
     }
 
@@ -47,13 +46,12 @@ function LoginPage({ fetch_login_status, isloggedin}) {
 
     return isloggedin ? (<Navigate to='/dashboard'/>) : (<div className="loginpage">
             {wrongconn && <div className="wrongconnbanner">
-                Something went wrong with your connection. Please try again
+                {wrongconn}
             </div>}
-            <form id="login-list" onSubmit={(e) => {
-                const status = send_credentials(e, host, port, username, password);
-                console.log(status)
-                if(status) {get_dblist(); setWrongconn(false)}
-                else{setWrongconn(true)}
+            <form id="login-list" onSubmit={async (e) => {
+                const status = await send_credentials(e, host, port, username, password);
+                if(status) {get_dblist(); setWrongconn("");}
+                else{setWrongconn("Invalid. Please check host, port, username, password")}
                 }}>
                 <label id="host" htmlFor="host">Host</label>
                 <input 

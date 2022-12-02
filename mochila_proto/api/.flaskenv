@@ -1,2 +1,2 @@
-FLASK_APP = base.py
+FLASK_APP = __init__.py
 FLASK_EV = development

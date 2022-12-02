@@ -7,8 +7,8 @@ function Recommendations() {
     const spec = {
         width: 400,
         height: 200,
-        mark: 'bar',
-        encoding: {
+        "mark": 'line',
+        "encoding": {
           x: { field: 'a', type: 'ordinal' },
           y: { field: 'b', type: 'quantitative' },
         },
@@ -27,15 +27,6 @@ function Recommendations() {
     { a: 'I', b: 52 },
     ],
     };
-    function getData() {
-        fetch('http://127.0.0.1:5000/testone', {method: "GET"})
-        .then((response) => response.json())
-        .then((data) => {
-            //setGraphs(graphs => [...graphs, data]);
-            console.log(data)
-        }).catch((err) => {console.log(err)});
-    };
-    getData();
     return(
         <div className="recommendations">
             <VL_Display spec={spec} data={data} />
