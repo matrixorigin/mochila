@@ -1,23 +1,24 @@
 import pymysql
+import pymysql.cursors
 #This file stores states that need be preserved across requests and handles standard queries to the DB
 
 global host, port, username, password, dbname #Modified via '/auth'
 global connection #Modified via '/auth'
 global dbschema #Modified via '/exploration/explorationlogic'
-global sqlfilters #Modified via '/exploration/explorationlogic'
-global vglfilters #Modified via '/exploration/explorationlogic'
+global size #Max number of rows from the db
+global querystr #Modified via '/exploration/explorationlogic'
 global mainview, recommendations #Modified via 'exploration/explorationlogic'
 
 def initialize_globals():
     global host, port, username, password, dbname, connection
-    global dbschema, sqlfilters, vglfilters
+    global dbschema, size, querystr
     global mainview, recommendations
     host, port, username, password, dbname = None, None, None, None, None
     connection = None
     dbname = None
     dbschema = []
-    sqlfilters = {}
-    vglfilters = {}
+    size = 100
+    querystr = None
     mainview = {}
     recommendations = {}
 
@@ -50,9 +51,9 @@ def connect():
     try:
         global host, port, username, password, dbname, connection
         if dbname:
-            connection = pymysql.connect(host=host, port=port, user=username, password=password, database=dbname)
+            connection = pymysql.connect(host=host, port=port, user=username, password=password, database=dbname, cursorclass=pymysql.cursors.DictCursor)
         else:
-            connection = pymysql.connect(host=host, port=port, user=username, password=password)
+            connection = pymysql.connect(host=host, port=port, user=username, password=password, cursorclass=pymysql.cursors.DictCursor)
         return True
     except:
         print("globals.connect: ERROR")
@@ -75,13 +76,13 @@ def disconnect():
 
 def run_query(query):
     try:
-        global connection
+        global connection, size
         if not connection:
             print("globals.run_query: No connection")
             return None
         cursor = connection.cursor()
         cursor.execute(query)
-        res = cursor.fetchall()
+        res = cursor.fetchmany(size)
         cursor.close()
         return res
     except:

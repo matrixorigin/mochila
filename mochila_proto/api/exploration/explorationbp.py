@@ -24,7 +24,6 @@ def get_mainview():
         res = None
         explorationlogic.run_select()
         res = globals.mainview
-        pprint.pprint(res)
         response = make_response(jsonify(res), 200)
         response.headers['Access-Control-Allow-Origin'] = '*'
         return response

@@ -6,8 +6,21 @@
    flex-direction: column;
  }
 
- .page {
+.exploration {
+    display: flex;
+    flex-direction: row;
     flex-grow: 1;
+    height: 93vh;
+}
+
+.topbottomstack {
     display: flex;
     flex-direction: column;
+    flex-grow: 1
+}
+
+.bottom_row {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
 }

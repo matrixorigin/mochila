@@ -1,5 +1,5 @@
 import React from "react";
-import { DataTable } from "../../utils";
+import { DataTable } from "../utils";
 import "./mainview.css"
 
 function Mainview({ mainview }) {
@@ -11,14 +11,14 @@ function Mainview({ mainview }) {
     } else if(!mainview["valid"]) {
         return(<div className="mainview">{mainview["error"]}</div>)
     } else if(mainview["valid"]) {
+        console.log(mainview)
         const cols = mainview["colnames"].map((headerstr) => {return {
                 "field": headerstr,
                 "headername": headerstr,
                 "flex": 1
             }})
-        const rows = []
-            for(let i = 0; i < mainview["data"].length; i++) {
-                rows[i] = mainview["data"][i];
+        const rows = mainview["data"]
+            for(let i = 0; i < rows.length; i++) {
                 rows[i]["id"] = i;
             }
         return(<div className="mainview">

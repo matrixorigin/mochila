@@ -40,7 +40,7 @@ def get_dblist():
     try:
         res = {"data": None}
         instr = "SHOW DATABASES;"
-        dblist = [col[0] for col in globals.run_query(instr)]
+        dblist = [col["Database"] for col in globals.run_query(instr)]
         res["data"] = dblist
         response = make_response(jsonify(res), 200)
         response.headers['Access-Control-Allow-Origin'] = '*'

@@ -3,7 +3,7 @@
     min-width: 12em;
     display: flex;
     overflow: scroll;
-    max-height: 100vh;
+    height: 100%;
     flex-direction: column;
     background-color: grey;
 }

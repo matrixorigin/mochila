@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { VL_Display } from "../../utils";
+import { VL_Display } from "../utils";
 import "./recommendations.css"
 
 function Recommendations() {

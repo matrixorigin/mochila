@@ -7,7 +7,7 @@ connection = None
 def connect():
     global host, port, username, password
     global connection
-    connection = pymysql.connect(host=host, port=port, user=username, password=password)
+    connection = pymysql.connect(host=host, port=port, user=username, password=password, cursorclass=pymysql.cursors.DictCursor)
     print("successfully created connection to DB directory")
     print(connection)
 
@@ -16,7 +16,7 @@ def get_db():
     dbcursor = connection.cursor()
     dbcursor.execute("SHOW DATABASES;")
     output = dbcursor.fetchall()
-    print(output[0][0])
+    print(output)
 
 def select_db():
     global connection, database, host, port, username, password
@@ -30,16 +30,15 @@ def select_db():
         print("select_db: exception")
 
 def describe():
-    global connection
+    global connection, database
     cursor = connection.cursor()
     # print("init_explore tablenames:")
     # print(tablenames)
     # for tablename in tablenames:
-    cursor.execute("describe mo_role;")
-    table_cols = [col[0] for col in cursor.fetchall()]
-    print(f"init_explore table_cols for mo_role:")
-    print(table_cols)
-    # print("test.describe: ERROR")
+    cursor.execute(f"describe mo_account;")
+    res = cursor.fetchall()
+    pprint.pprint(res)
+    # table_cols = [col[0] for col in cursor.fetchall()]
     if cursor:
         cursor.close()
 
@@ -54,11 +53,11 @@ def getdata(tablename, colname):
         cursor.close()
 
 def main():
-    # connect()
-    # get_db()
+    connect()
+    get_db()
     select_db()
-    # describe()
-    getdata("mo_role", "*")
+    describe()
+    # getdata("mo_role", "*")
 
     
 
