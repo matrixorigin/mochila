@@ -14,7 +14,8 @@ def init_exploration():
         "valid": False,
         "Error": "Error not initialized.",
         "data": None,
-        "colnames": None
+        "colnames": None,
+        "querystr": None
     } #init mainview
 
 def set_filters(requestdata):
@@ -31,14 +32,16 @@ def run_select(): #convert filters into mainview
         print("---run_select query---")
         print(globals.querystr)
         print("----------------------")
+        globals.mainview["querystr"] = globals.querystr
         #Return error if query failed 
         if res is None:
             globals.mainview["valid"] = False
             globals.mainview["error"] = f"Query Failed. Query ran: \"{globals.querystr}\""
             return False
         elif not res: #if empty, notify of no matches
-            globals.mainvew["valid"] = False
+            globals.mainview["valid"] = False
             globals.mainview["error"] = f"No entries matched your query. Query ran: \"{globals.querystr}\""
+            return True
         #generate mainview and send to globals.mainview
         globals.mainview["valid"] = True
         globals.mainview["data"] = res

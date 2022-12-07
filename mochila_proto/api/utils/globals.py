@@ -8,6 +8,7 @@ global dbschema #Modified via '/exploration/explorationlogic'
 global size #Max number of rows from the db
 global querystr #Modified via '/exploration/explorationlogic'
 global mainview, recommendations #Modified via 'exploration/explorationlogic'
+global history_db #Not modified
 
 def initialize_globals():
     global host, port, username, password, dbname, connection
@@ -18,6 +19,7 @@ def initialize_globals():
     dbname = None
     dbschema = []
     size = 100
+    history_db = "mochila_history"
     querystr = None
     mainview = {}
     recommendations = {}
@@ -91,3 +93,17 @@ def run_query(query):
     finally:
         if cursor:
             cursor.close()
+
+def run_query_commit(query):
+    try:
+        global connection
+        if not connection:
+            print("globals.run_query_commit: No connection")
+            return False
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+        connection.commit()
+        return True
+    except:
+        print("globals.run_query_commit: ERROR")
+        return False

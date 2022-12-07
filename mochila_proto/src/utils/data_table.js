@@ -3,9 +3,9 @@ import { Box } from "@mui/material";
 import {DataGrid} from '@mui/x-data-grid'
 
 function DataTable({ col_desc, table }) {
-    return(<Box sx={{height: '80%', width: '90%'}}>
+    return(<Box sx={{height: '90%', width: '95%'}}>
         <DataGrid
-            style={{backgroundColor:"white"}}
+            sx={{backgroundColor:"#FFFFFF"}}
             columns={col_desc}
             rows={table}
             rowsPerPageOptions={[1,5,10,20,100]}

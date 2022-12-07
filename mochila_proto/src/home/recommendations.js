@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { VL_Display } from "../utils";
 import "./recommendations.css"
 
@@ -27,10 +27,10 @@ function Recommendations() {
     { a: 'I', b: 52 },
     ],
     };
+
     return(
-        <div className="recommendations">
-            <VL_Display spec={spec} data={data} />
-        </div>
+      <div className="recommendations">
+      </div>
     );
 };
 

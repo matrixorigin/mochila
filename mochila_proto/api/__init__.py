@@ -1,7 +1,7 @@
 from flask import Flask
 import api.utils.globals as globals
-from api.auth.authbp import authBP
-from api.exploration.explorationbp import explorationBP
+from api.auth.auth_bp import authBP
+from api.exploration.exploration_bp import explorationBP
 
 app = Flask(__name__)
 globals.initialize_globals()

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, make_response, jsonify
-import api.exploration.explorationlogic as explorationlogic
+import api.exploration.exploration_logic as exploration_logic
 import api.utils.globals as globals
 import pprint
 
@@ -9,7 +9,7 @@ explorationBP = Blueprint("explorationBP", __name__)
 def get_sidebar():
     try:
         res = {"data": None}
-        if explorationlogic.set_dbschema():
+        if exploration_logic.set_dbschema():
             res["data"] = globals.dbschema
         response = make_response(jsonify(res), 200)
         response.headers['Access-Control-Allow-Origin'] = '*'
@@ -22,7 +22,7 @@ def get_sidebar():
 def get_mainview():
     try:
         res = None
-        explorationlogic.run_select()
+        exploration_logic.run_select()
         res = globals.mainview
         response = make_response(jsonify(res), 200)
         response.headers['Access-Control-Allow-Origin'] = '*'
@@ -36,7 +36,7 @@ def set_filters():
     try:
         res = {"valid": False}
         requestdata = request.get_json(force=True)
-        res["valid"] = explorationlogic.set_filters(requestdata)
+        res["valid"] = exploration_logic.set_filters(requestdata)
         response = make_response(jsonify(res), 200)
         response.headers['Access-Control-Allow-Origin'] = '*'
         return response

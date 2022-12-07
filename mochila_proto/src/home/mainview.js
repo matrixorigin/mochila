@@ -11,7 +11,6 @@ function Mainview({ mainview }) {
     } else if(!mainview["valid"]) {
         return(<div className="mainview">{mainview["error"]}</div>)
     } else if(mainview["valid"]) {
-        console.log(mainview)
         const cols = mainview["colnames"].map((headerstr) => {return {
                 "field": headerstr,
                 "headername": headerstr,
@@ -25,9 +24,8 @@ function Mainview({ mainview }) {
             <DataTable col_desc={cols} table={rows}></DataTable>
         </div>)
     } else {
-        return(<div className="Something unaccounted for happened."></div>)
+        return(<div className="mainview">Something unaccounted for happened.</div>)
     }
-
 }
 
 export default Mainview;
