@@ -7,7 +7,7 @@ def initialize_hist_db():
             f"CREATE DATABASE {globals.history_db};",
             f"CREATE TABLE {globals.history_db}.querylog ( querystr VARCHAR(255), time DATETIME );"
         ]
-        for instr in instr_set
+        for instr in instr_set:
             run_query_commit(instr)
         return True
     except:
@@ -15,33 +15,32 @@ def initialize_hist_db():
         return False
 
 def verify_hist_db():
-    try:
+    # try:
+    if True:
         query_res = globals.run_query('SHOW DATABASES;')
         dbnames = [col["Databases"] for col in query_res]
         if globals.history_db in dbnames:
             return True
-        print("initializing new history_db...")
-        initialize_hist_db()
-        return True
-    except:
-        print(history_logic.verify_hist_db: ERROR)
         return False
+    # except:
+    #     print("history_logic.verify_hist_db: ERROR")
+    #     return None
     
 
 def insert_entry(querystr):
     try:
         query = f"INSERT INTO {globals.history_db}.querylog VALUES ( '{querystr}', CURRENT_TIMESTAMP );"
         return run_query_commit(query)
-    except
+    except:
         print("history_logic.insert_entry ERROR")
 
 def run_select_filter(filterstr):
     try:
         ret = {"valid": False, "error": "", "data": None}
         split = filterstr.split(" ")
-        query = f"SELECT querystr, time from {globals.history_db}.querylog 
-        WHERE querystr like {"%".join(split)} COLLATE UTF8_GENERAL_CI
-        ORDER BY time DESC LIMIT 100;"
+        query = f'''SELECT querystr, time from {globals.history_db}.querylog 
+        WHERE querystr like {("%%".join(split))[1:-1]} COLLATE UTF8_GENERAL_CI
+        ORDER BY time DESC LIMIT 100;'''
         res = globals.run_query(globals.querystr)
         if res is None:
             ret["valid"] = False

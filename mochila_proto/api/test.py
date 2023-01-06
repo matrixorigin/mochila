@@ -1,10 +1,11 @@
 import pymysql
 import pymysql.cursors
 import pprint
+
 host, port, username, password, database = "127.0.0.1", 6001, "dump", "111", "mo_catalog"
 connection = None
 
-def connect():
+def connect1():
     global host, port, username, password
     global connection
     connection = pymysql.connect(host=host, port=port, user=username, password=password, cursorclass=pymysql.cursors.DictCursor)
@@ -53,12 +54,10 @@ def getdata(tablename, colname):
         cursor.close()
 
 def main():
-    connect()
-    get_db()
-    select_db()
-    describe()
+    # get_db()
+    # select_db()
+    # describe()
     # getdata("mo_role", "*")
-
     
 
 if __name__ == "__main__":

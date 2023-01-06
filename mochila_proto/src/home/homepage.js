@@ -3,31 +3,41 @@ import Sidebar from "./sidebar";
 import Mainview from "./mainview";
 import Filters from "./filters";
 import Recommendations from "./recommendations";
+import { verify_db } from '../utils';
 import './homepage.css'
+
+const backend = process.env.REACT_APP_BACKEND;
 
 
 function Homepage({setIsloggedin}) {
-    const [dbschema, setDbschema] = useState([])
+    const [dbschema, setDbschema] = useState([]);
     const [mainview, setMainView] = useState({});
-    const [recommendations, setRecommendations] = useState([])
+    const [recommendations, setRecommendations] = useState([]);
 
     useEffect(() => { //loads dbschema once on mount
-        fetch('http://127.0.0.1:5000/main/exploration/sidebar', {method:'GET'})
+        fetch(`${backend}:5000/main/exploration/sidebar`, {method:'GET'})
         .then(response => response.json())
-        .then(responsedata => {setDbschema(responsedata["data"]); console.log(responsedata)})
+        .then(responsedata => {
+            setDbschema(responsedata["data"]); 
+            console.log(responsedata);})
         .catch((err) => {console.log(`exploration.js fetch sidebar: ${err}`)})
+        // const verify_hist = async () => {
+        //     verify_db();
+        // }
+        // verify_hist()
     }, [])
 
     async function run_select(data) {
-        fetch('http://127.0.0.1:5000/main/exploration/filters', {
+        fetch( `${backend}:5000/main/exploration/filters`, {
             method:'POST', body:JSON.stringify(data)})
             .then(response => response.json()).then(responsedata => {
                 if(responsedata["valid"]) {
-                    fetch('http://127.0.0.1:5000/main/exploration/mainview', {method:'GET'})
+                    //fetch mainview update
+                    fetch(`${backend}:5000/main/exploration/mainview`, {method:'GET'})
                     .then(response => response.json()).then(responsedata => {
                         setMainView(responsedata);
+                        return responsedata["error"];
                     })
-                    //fetch recommendations
                 }
             })
     }

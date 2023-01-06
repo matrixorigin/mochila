@@ -24,6 +24,7 @@ def set_credentials():
 
 @authBP.route('/credentials', methods=['GET'])
 def get_loginstatus():
+    print("hellodocker")
     try:
         res = {"loggedin": False}
         if globals.dbname and globals.connection and globals.host and globals.port and globals.username:

@@ -3,6 +3,8 @@ import { Navigate } from "react-router-dom";
 import { send_credentials } from "../utils";
 import './loginpage.css'
 
+const backend = process.env.REACT_APP_BACKEND;
+
 function LoginPage({isloggedin, setIsLoggedin}) {
     const [username, setUsername] = useState('dump');
     const [password, setPassword] = useState('111');
@@ -13,7 +15,7 @@ function LoginPage({isloggedin, setIsLoggedin}) {
 
     async function select_db(e) {
         var data = {"dbname": e.target.id};
-        fetch('http://127.0.0.1:5000/auth/db', {
+        fetch(`${backend}:5000/auth/db`, {
             method: "POST",
             body: JSON.stringify(data)
         }).then(response => response.json())
@@ -48,6 +50,9 @@ function LoginPage({isloggedin, setIsLoggedin}) {
             {wrongconn && <div className="wrongconnbanner">
                 {wrongconn}
             </div>}
+            <div style={{display:'flex', backgroundColor:'white', borderRadius: '1em', padding: '0.5em', marginTop: '4em'}}>
+                Note: Please ues host.docker.internal if trying to <br />
+            connect to DB hosted on 172.0.0.1</div>
             <form id="login-list" onSubmit={async (e) => {
                 const status = await send_credentials(e, host, port, username, password);
                 if(status) {get_dblist(); setWrongconn("");}

@@ -5,7 +5,23 @@
 - The frontend is constructed as a create-react-app
 - The backend is hosted locally via Python and Flask
 ## Getting Started
-- There are two processes that must be started locally to run the prototype webpage, which are a React Javascript frontend and a Flask Python server. It is recommended to use virtualenv, anaconda, or another environment manager to contain the dependencies of this prototype.
+- There are two processes that must be started locally to run the prototype webpage, which are a React Javascript frontend and a Flask Python server. 
+### Option 1: Docker
+- There are Docker images that are correlated with the front and backend. First, pull the images from Docker Hub
+
+```console
+$ docker pull tengui/mochila-frontend:latest
+$ docker pull tengui/mochila-backend:latest
+```
+- To run the containers, use the following commands:
+
+```console
+$ docker run --rm --name mochila_frontend -p 3000:3000 -d tengui/mochila-frontend
+$ docker run --rm --name mochila_backend -p 5000:5000 -d tengui/mochila-backend
+```
+Note: The docker files are built on Windows. Please post a issue if Docker image is not up to date with github.
+
+### Option 2: Build locally
 - Start by cloning the repository locally and entering the prototype project
 git clone..
 cd ./mochila_proto
@@ -45,3 +61,6 @@ $ npm start
 3. Connecting to a database
 - In order to connect to a database, enter the host, port, username, and password on the login screen of the web page
 - If the connection is successful, the table below will display the databases available. Select one to enter the main program
+
+
+docker run --rm --net mochila-net --name mochila_frontend -d -p 3000:3000 docker-mochila:latest

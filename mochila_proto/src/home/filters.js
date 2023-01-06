@@ -11,10 +11,13 @@ function TabPanel({value, index, primary}) {
 
 function Filters({ runselect}) {
     const [tabindx, setTabindx] = useState(0);
+    const [historyfilter, setHistoryfilter] = useState("");
+    const [history, setHistory] = useState({});
 
-    function handlesubmit(...args) {
+    async function handlesubmit_select(...args) {
         var data = {"querystr": args.join(" ")};
-        runselect(data)
+        var ret = await runselect(data)
+        return ret
     }
 
     function handletabchange(e, newval) {
@@ -23,16 +26,21 @@ function Filters({ runselect}) {
 
     return(<Box sx={{width:'50%'}}><Toolbar disableGutters={true}>
                 <Tabs value={tabindx} onChange={handletabchange}>
-                <Tab sx={{color:"#CCCCCC"}} label="Terminal"/>
-                <Tab sx={{color:"#CCCCCC"}} label="History"/>
+                    <Tab sx={{color:"#CCCCCC"}} label="Terminal"/>
+                    <Tab sx={{color:"#CCCCCC"}} label="History"/>
                 </Tabs></Toolbar>
                 <TabPanel value={tabindx} index={0} primary={
                     <div style={{height: 'calc(37vh - 40px)', width:'calc(100% - 20px'}}>
                     <ReactTerminal showControlBar={false} showControlButtons={false} theme="material-dark"
-                        defaultHandler={handlesubmit} commands={handlesubmit}/>
+                        defaultHandler={handlesubmit_select} commands={handlesubmit_select}/>
                     </div>
-                }>
-                </TabPanel>
+                }/>
+                <TabPanel value={tabindx} index={1} primary={
+                    <Box>
+
+                    </Box>
+                }/>
+                    
                 </Box>
     )
 }
