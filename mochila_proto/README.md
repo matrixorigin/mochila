@@ -1,5 +1,4 @@
-# Mochila: Prototype v0.1
-- Note as of 10/26/2022: The communication between frontend and backend is currently being designed out, so the prototype cannot connect to any databases yet.
+# Mochila: Prototype v0.3
 ## Purpose
 - This prototype is meant to simulate user interaction between the front and backend of Mochila, and help build out/test various individual components.
 - The frontend is constructed as a create-react-app
@@ -19,7 +18,7 @@ $ docker pull tengui/mochila-backend:latest
 $ docker run --rm --name mochila_frontend -p 3000:3000 -d tengui/mochila-frontend
 $ docker run --rm --name mochila_backend -p 5000:5000 -d tengui/mochila-backend
 ```
-Note: The docker files are built on Windows. Please post a issue if Docker image is not up to date with github.
+Note: The docker files are built on Windows. Please post a issue if Docker image is not up to date with github or if image has issues while running.
 
 ### Option 2: Build locally
 - Start by cloning the repository locally and entering the prototype project
